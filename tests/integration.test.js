@@ -21,6 +21,14 @@ describe('Integration Tests', () => {
     nock.cleanAll();
   });
 
+  test('Should serve the homepage', async () => {
+    const response = await request(app)
+      .get('/');
+    
+    expect(response.statusCode).toBe(200);
+    expect(response.type).toMatch(/html/);
+  });
+
   test('Should replace Yale with Fale in fetched content', async () => {
     // Setup mock for example.com
     nock('https://example.com')
